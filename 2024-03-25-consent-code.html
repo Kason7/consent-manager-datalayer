@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empty HTML Template</title>
+    <style>
+        .disclaimer-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .disclaimer-info {
+            flex: 1;
+            max-width: 650px;
+            padding: 10px 25px;
+        }
+
+        .disclaimer-info a {
+            color: white;
+        }
+
+        .disclaimer-options {
+            display: flex;
+            flex: 1;
+            flex-wrap: wrap;
+            max-width: 550px;
+            padding: 10px 25px;
+        }
+
+        .option-label {
+            color: white;
+            margin-right: 10px;
+        }
+
+        .option-checkbox {
+            margin-right: 5px;
+        }
+
+        .disclaimer-action {
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            padding: 10px 25px;
+            margin: 0 25px 0 0;
+            border: none;
+        }
+
+            /* Media query for screens under 500px */
+        @media (max-width: 500px) {
+            .disclaimer-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .disclaimer-options {
+                margin-bottom: 25px;
+            }
+
+            .disclaimer-action {
+              margin: 0 auto 25px
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Your content goes here -->
+    <script>
+        // JavaScript code
+        function createDisclaimerFooter() {
+            // Create the main disclaimer footer container
+            const disclaimerFooter = document.createElement("div");
+            disclaimerFooter.className = "disclaimer-footer";
+            
+            // Create the disclaimer info section
+            const disclaimerInfo = document.createElement("div");
+            disclaimerInfo.innerHTML = `
+                    <p>
+                        Ved at bruge dette websted accepterer du vores brug af cookies og <a href="/privatlivspolitik"><u>privatlivspolitik</u></a>. Vi bruger cookies for at give dig en fantastisk oplevelse og for at hjælpe vores hjemmeside med at køre effektivt.
+                    </p>
+                `;
+            disclaimerInfo.className = "disclaimer-info";
+            
+            // Create the disclaimer options section
+            const disclaimerOptions = document.createElement("div");
+            disclaimerOptions.className = "disclaimer-options";
+            
+            // Loop through consent options to create checkboxes
+            const consentOptions = [
+                { label: "Ad storage", name: "ad_storage" },
+                { label: "Ad user data", name: "ad_user_data" },
+                { label: "Ad personalization", name: "ad_personalization" },
+                { label: "Analytics storage", name: "analytics_storage" },
+                { label: "Functionality storage", name: "functionality_storage" },
+                { label: "Personalization storage", name: "personalization_storage" },
+                { label: "Security storage", name: "security_storage" }
+            ];
+
+            consentOptions.forEach(option => {
+                const label = document.createElement("label");
+                label.textContent = option.label;
+                label.className = "option-label";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.name = option.name;
+                checkbox.checked = getCheckboxState(option.name);
+                checkbox.className = "option-checkbox";
+
+                checkbox.addEventListener("change", () => handleConsentOptions(option.name, checkbox.checked));
+
+                label.appendChild(checkbox);
+                disclaimerOptions.appendChild(label);
+            });
+
+            // Function to get checkbox state from localStorage
+            function getCheckboxState(optionName) {
+                const consentOptions = JSON.parse(localStorage.getItem("consentOptions")) || {};
+                return consentOptions[optionName] === "granted";
+            }
+            
+            // Create the OK button
+            const disclaimerAction = document.createElement("button");
+            disclaimerAction.textContent = "OK";
+            disclaimerAction.className = "disclaimer-action";
+            
+            // Add click event listener to OK button
+            disclaimerAction.addEventListener("click", handleCookieDisclaimer);
+
+            // Append elements to disclaimer footer container
+            disclaimerFooter.appendChild(disclaimerInfo);
+            disclaimerFooter.appendChild(disclaimerOptions);
+            disclaimerFooter.appendChild(disclaimerAction);
+
+            return disclaimerFooter;
+        }
+
+        // Handle consent options change
+        function handleConsentOptions(optionName, checked) {
+            // Update consent options in localStorage
+            const consentOptions = JSON.parse(localStorage.getItem("consentOptions")) || {};
+            consentOptions[optionName] = checked ? "granted" : "denied";
+            localStorage.setItem("consentOptions", JSON.stringify(consentOptions));
+        }
+
+        // Handle click event for OK button
+        function handleCookieDisclaimer() {
+            // Set localStorage to indicate cookie approval
+            localStorage.setItem("cookieApproval", true);
+            
+            // Push to dataLayer
+            const consentOptions = JSON.parse(localStorage.getItem("consentOptions")) || {};
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: "consent_update", ...Object.fromEntries(Object.entries(consentOptions).map(([key, value]) => [key, value]))});
+            
+            // Remove disclaimer footer from the document
+            const disclaimerFooter = document.querySelector(".disclaimer-footer");
+            disclaimerFooter.remove();
+        }
+
+        // Render disclaimer footer to the document body
+        document.addEventListener("DOMContentLoaded", () => {
+            // Initialize consent options in localStorage if not already set
+            const savedConsent = JSON.parse(localStorage.getItem("consentOptions"));
+            const consentDataLayer = data => {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({ event: "consent_default", ...Object.fromEntries(Object.entries(data).map(([key, value]) => [key, value]))});
+            }
+            const defaultConsentOptions = {};
+            const consentOptions = [
+                "ad_storage",
+                "ad_user_data",
+                "ad_personalization",
+                "analytics_storage",
+                "functionality_storage",
+                "personalization_storage",
+                "security_storage"
+            ];
+            consentOptions.forEach(option => {
+                defaultConsentOptions[option] = "granted";
+            });
+            if (!savedConsent) {
+                localStorage.setItem("consentOptions", JSON.stringify(defaultConsentOptions));
+                consentDataLayer(defaultConsentOptions)
+            } else {
+                consentDataLayer(savedConsent)
+            }
+
+            // Check localStorage for cookie approval
+            if (localStorage.getItem("cookieApproval") === null) {
+                // If cookie approval is not set, render disclaimer footer
+                const disclaimerFooter = createDisclaimerFooter();
+                document.body.appendChild(disclaimerFooter);
+            }
+        });
+
+    </script>
+
+</body>
+</html>
