@@ -7,7 +7,7 @@ function createDisclaimerFooter() {
   const disclaimerInfo = document.createElement("div");
   disclaimerInfo.innerHTML = `
                     <p>
-                        Ved at bruge dette websted accepterer du vores brug af cookies og <a href="/privatlivspolitik"><u>privatlivspolitik</u></a>. Vi bruger cookies for at give dig en fantastisk oplevelse og for at hjælpe vores hjemmeside med at køre effektivt.
+                        Ved at bruge dette websted accepterer du vores brug af cookies og <a href="/policies/privacy-policy/"><u>privatlivspolitik</u></a>. Vi bruger cookies for at give dig en fantastisk oplevelse og for at hjælpe vores hjemmeside med at køre effektivt.
                     </p>
                 `;
   disclaimerInfo.className = "disclaimer-info";

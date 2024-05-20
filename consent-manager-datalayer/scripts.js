@@ -8,12 +8,12 @@ function handleConsentOptions(optionName, checked) {
 }
 
 function handleCookieToggle() {
-  const consentPopup = document.querySelector(".disclaimer-popup");
+  const consentFade = document.querySelector(".disclaimer-fade");
   // Toggle the display property of the style element
-  if (consentPopup.style.display === "none") {
-    consentPopup.style.display = "block";
+  if (consentFade.style.display === "none") {
+    consentFade.style.display = "block";
   } else {
-    consentPopup.style.display = "none";
+    consentFade.style.display = "none";
   }
 }
 
@@ -34,8 +34,10 @@ function handleCookieDisclaimer() {
   });
 
   // Remove disclaimer footer from the document
+  const disclaimerFade = document.querySelector(".disclaimer-fade");
   const disclaimerFooter = document.querySelector(".disclaimer-footer");
-  disclaimerFooter.remove();
+  disclaimerFade.style.display = "none";
+  disclaimerFooter.style.display = "none";
 }
 
 // Handle consent options object in localStorage and dataLayer

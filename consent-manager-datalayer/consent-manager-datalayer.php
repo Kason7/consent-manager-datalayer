@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Consent manager
+Plugin Name: Consent Manager for dataLayer
 Description: Adds a consent manager to the header for site-wide use.
-Version: 1.016
+Version: 1.025
 Author: Kasper M. Sonne
 */
 

@@ -1,22 +1,28 @@
 function createConsentPopup() {
+  // Create the disclaimer background fade
+  const disclaimerFade = document.createElement("div");
+  disclaimerFade.className = "disclaimer-fade";
+  disclaimerFade.style.display = "none";
+  disclaimerFade.addEventListener("click", handleCookieToggle);
+
   // Create the main disclaimer popup container
   const disclaimerPopup = document.createElement("div");
   disclaimerPopup.className = "disclaimer-popup";
+  disclaimerFade.appendChild(disclaimerPopup);
 
   // Create the disclaimer info section
   const disclaimerText = document.createElement("div");
   disclaimerText.className = "disclaimer-text";
   disclaimerText.innerHTML = `
                     <p>
-                        Læs om vores brug af cookies og <a href="/privatlivspolitik"><u>privatlivspolitik</u></a>.
+                        Læs om vores brug af cookies og <a href="/policies/privacy-policy/"><u>privatlivspolitik</u></a>.
                     </p>
                 `;
+  disclaimerPopup.appendChild(disclaimerText);
 
   // Create the disclaimer options section
   const disclaimerOptions = document.createElement("div");
   disclaimerOptions.className = "disclaimer-options";
-
-  // Loop through consent options to create checkboxes
   const consentOptions = [
     { label: "Ad storage", name: "ad_storage" },
     { label: "Ad user data", name: "ad_user_data" },
@@ -26,7 +32,6 @@ function createConsentPopup() {
     { label: "Personalization storage", name: "personalization_storage" },
     { label: "Security storage", name: "security_storage" },
   ];
-
   consentOptions.forEach((option) => {
     const label = document.createElement("label");
     label.textContent = option.label;
@@ -45,24 +50,20 @@ function createConsentPopup() {
     label.appendChild(checkbox);
     disclaimerOptions.appendChild(label);
   });
-
   // Function to get checkbox state from localStorage
   function getCheckboxState(optionName) {
     const consentOptions =
       JSON.parse(localStorage.getItem("consentOptions")) || {};
     return consentOptions[optionName] === "granted";
   }
+  disclaimerPopup.appendChild(disclaimerOptions);
 
   // Create the OK button
   const disclaimerConfirm = document.createElement("button");
   disclaimerConfirm.className = "disclaimer-confirm";
   disclaimerConfirm.textContent = "OK";
   disclaimerConfirm.addEventListener("click", handleCookieDisclaimer);
-
-  // Append elements to disclaimer footer container
-  disclaimerPopup.appendChild(disclaimerText);
-  disclaimerPopup.appendChild(disclaimerOptions);
   disclaimerPopup.appendChild(disclaimerConfirm);
 
-  return disclaimerPopup;
+  return disclaimerFade;
 }
