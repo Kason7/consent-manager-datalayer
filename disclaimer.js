@@ -14,7 +14,7 @@ function createDisclaimerFooter() {
 
   // Create the settings button
   const disclaimerToggle = document.createElement("button");
-  disclaimerToggle.textContent = "Settings";
+  disclaimerToggle.textContent = "Indstillinger";
   disclaimerToggle.className = "disclaimer-toggle";
   disclaimerToggle.addEventListener("click", handleCookieToggle);
 

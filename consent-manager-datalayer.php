@@ -2,7 +2,7 @@
 /*
 Plugin Name: Consent Manager for dataLayer
 Description: Adds a consent manager to the header for site-wide use.
-Version: 1.025
+Version: 1.0
 Author: Kasper M. Sonne
 */
 
