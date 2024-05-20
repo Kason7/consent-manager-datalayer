@@ -10,10 +10,10 @@ function handleConsentOptions(optionName, checked) {
 function handleCookieToggle() {
   const consentFade = document.querySelector(".disclaimer-fade");
   // Toggle the display property of the style element
-  if (consentFade.style.display === "none") {
-    consentFade.style.display = "block";
-  } else {
-    consentFade.style.display = "none";
+  if (consentFade) {
+    consentFade.style.display === "none"
+      ? (consentFade.style.display = "block")
+      : (consentFade.style.display = "none");
   }
 }
 
@@ -35,9 +35,10 @@ function handleCookieDisclaimer() {
 
   // Remove disclaimer footer from the document
   const disclaimerFade = document.querySelector(".disclaimer-fade");
+  disclaimerFade.remove();
+
   const disclaimerFooter = document.querySelector(".disclaimer-footer");
-  disclaimerFade.style.display = "none";
-  disclaimerFooter.style.display = "none";
+  disclaimerFooter.remove();
 }
 
 // Handle consent options object in localStorage and dataLayer
