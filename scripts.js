@@ -7,13 +7,13 @@ function handleConsentOptions(optionName, checked) {
   localStorage.setItem("consentOptions", JSON.stringify(consentOptions));
 }
 
-function handleCookieToggle() {
+function handleCookieToggle(event) {
+  event.stopPropagation();
   const consentFade = document.querySelector(".disclaimer-fade");
   // Toggle the display property of the style element
   if (consentFade) {
-    consentFade.style.display === "none"
-      ? (consentFade.style.display = "block")
-      : (consentFade.style.display = "none");
+    const currentDisplay = window.getComputedStyle(consentFade).display;
+    consentFade.style.display = currentDisplay === "none" ? "flex" : "none";
   }
 }
 

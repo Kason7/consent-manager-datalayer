@@ -1,4 +1,6 @@
 .disclaimer-fade {
+  justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.75);
   position: fixed;
   top: 0;
@@ -10,19 +12,35 @@
 
 .disclaimer-popup {
   margin: 25vh auto;
-  background: white;
-  max-width: 500px;
+  background: #454545;
+  max-width: 700px;
   color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  gap: 1.5rem;
 }
 
-.disclaimer-text > p {
-  padding: 2rem;
-}
-
-.disclaimer-confirm {
-  background-color: black;
+.disclaimer-title {
+  text-transform: uppercase;
+  text-align: center;
   color: white;
-  margin: 0 2rem 2rem;
+  font-weight: bold;
+}
+
+.disclaimer-text {
+  text-align: center;
+  color: white;
+}
+
+.disclaimer-link {
+  text-align: center;
+}
+
+.disclaimer-link a {
+  color: white;
+  text-decoration: underline;
 }
 
 .disclaimer-footer {
@@ -30,7 +48,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: black;
+  background-color: #454545;
   color: white;
   box-sizing: border-box;
   display: flex;
@@ -39,47 +57,108 @@
   z-index: 10;
 }
 
+.disclaimer-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 1021px;
+  margin: 0 auto;
+  align-items: center;
+}
+
 .disclaimer-info {
-  flex: 1;
-  max-width: 650px;
-  padding: 10px 25px;
+  padding: 1rem;
+}
+
+.disclaimer-info p {
+  margin-bottom: 0;
 }
 
 .disclaimer-info a {
   color: white;
 }
 
+.disclaimer-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0 1rem 1rem;
+}
+
 .disclaimer-options {
   display: flex;
   flex: 1;
   flex-wrap: wrap;
-  max-width: 550px;
-  padding: 0 2rem 1rem;
+  padding: 1rem 1rem 0;
 }
 
 .option-label {
   margin-right: 10px;
   cursor: pointer;
+  color: white;
+  font-weight: normal;
 }
 
 .option-checkbox {
   margin-right: 5px;
 }
 
+.disclaimer-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.disclaimer-cancel {
+  width: 30%;
+  border: #fff solid 0.5px;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-bottom: 0;
+  color: white;
+}
+
+.disclaimer-confirm {
+  width: 30%;
+  background-color: rgb(179, 234, 64);
+  color: black;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
 .disclaimer-toggle {
-  text-decoration: underline;
+  border: #fff solid 0.5px;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 20%;
+  margin-bottom: 0;
 }
 
 .disclaimer-action {
-  background-color: white;
+  background-color: rgb(179, 234, 64);
   color: black;
   cursor: pointer;
-  padding: 10px 25px;
-  margin: 0 25px 0 0;
-  border: none;
+  padding: 0.5rem;
+  width: 20%;
+  margin-right: 0;
+  margin-bottom: 0;
 }
 
-/* Media query for screens under 500px */
+@media (max-width: 750px) {
+  .disclaimer-toggle,
+  .disclaimer-action,
+  .disclaimer-cancel,
+  .disclaimer-confirm {
+    width: 100%;
+  }
+}
+
 @media (max-width: 500px) {
   .disclaimer-footer {
     flex-direction: column;
@@ -90,11 +169,8 @@
     margin: 7vh auto;
   }
 
-  .disclaimer-options {
-    margin-bottom: 25px;
-  }
-
-  .disclaimer-action {
-    margin: 0 auto 25px;
+  .disclaimer-wrapper,
+  .disclaimer-buttons {
+    flex-direction: column;
   }
 }
