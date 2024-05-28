@@ -2,7 +2,7 @@
 /*
 Plugin Name: Consent Manager for dataLayer
 Description: Consent manager based on localStorage and dataLayer events, to use with Consent Mode tags and Consent State in Google Tag Manager.
-Version: 1.03 Elstyrken
+Version: 1.10 - Fuzion
 Author: Kasper M. Sonne
 */
 

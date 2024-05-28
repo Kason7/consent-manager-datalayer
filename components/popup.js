@@ -13,27 +13,45 @@ function createConsentPopup() {
   // Create the disclaimer title
   const disclaimerTitle = document.createElement("h2");
   disclaimerTitle.className = "disclaimer-title";
-  disclaimerTitle.textContent = `
-                  Vores cookies
-                `;
+  if (window.location.href.includes(".dk")) {
+    disclaimerTitle.textContent = "Vores cookies";
+  } else {
+    disclaimerTitle.textContent = "Our cookies";
+  }
+
   disclaimerPopup.appendChild(disclaimerTitle);
 
   // Create the disclaimer text
   const disclaimerText = document.createElement("p");
   disclaimerText.className = "disclaimer-text";
-  disclaimerText.textContent = `                     
-                    Vores hjemmeside bruger cookies og lignende teknologier til at personalisere de annoncer, der vises for dig, og til at hjælpe med at give dig den bedste oplevelse på vores hjemmeside.                     
-                  `;
+  if (window.location.href.includes(".dk")) {
+    disclaimerText.textContent = `
+      Vores hjemmeside bruger cookies og lignende teknologier til at personalisere de annoncer, der vises for dig, og til at hjælpe med at give dig den bedste oplevelse på vores hjemmeside.
+    `;
+  } else {
+    disclaimerText.textContent = `
+      Our website uses cookies and similar technologies to personalize the advertisements shown to you and to help provide you with the best experience on our website.
+    `;
+  }
   disclaimerPopup.appendChild(disclaimerText);
 
   // Create the disclaimer link
   const disclaimerLink = document.createElement("div");
   disclaimerLink.className = "disclaimer-link";
-  disclaimerLink.innerHTML = `
-                        <a href="/persondata/">
-                          Læs om vores brug af cookies og privatlivspolitik.
-                        </a>
-                    `;
+  if (window.location.href.includes(".dk")) {
+    disclaimerLink.innerHTML = `
+      <a href="/persondatapolitik/">
+        Læs om vores brug af cookies og privatlivspolitik.
+      </a>
+    `;
+  } else {
+    disclaimerLink.innerHTML = `
+      <a href="/privacy-policy/">
+      Read about our use of cookies and privacy policy.
+      </a>
+    `;
+  }
+
   disclaimerPopup.appendChild(disclaimerLink);
 
   // Create the disclaimer options section
@@ -82,14 +100,24 @@ function createConsentPopup() {
   // Create the cancel button
   const disclaimerCancel = document.createElement("button");
   disclaimerCancel.className = "disclaimer-cancel";
-  disclaimerCancel.textContent = "Annuller";
+  if (window.location.href.includes(".dk")) {
+    disclaimerCancel.textContent = "Annuller";
+  } else {
+    disclaimerCancel.textContent = "Cancel";
+  }
+
   disclaimerCancel.addEventListener("click", handleCookieToggle);
   disclaimerButtons.appendChild(disclaimerCancel);
 
   // Create the OK button
   const disclaimerConfirm = document.createElement("button");
   disclaimerConfirm.className = "disclaimer-confirm";
-  disclaimerConfirm.textContent = "Bekræft";
+  if (window.location.href.includes(".dk")) {
+    disclaimerConfirm.textContent = "Bekræft";
+  } else {
+    disclaimerConfirm.textContent = "Confirm";
+  }
+
   disclaimerConfirm.addEventListener("click", handleCookieDisclaimer);
   disclaimerButtons.appendChild(disclaimerConfirm);
 

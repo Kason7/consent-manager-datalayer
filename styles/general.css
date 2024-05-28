@@ -1,3 +1,10 @@
+button {
+  border: none;
+  background-color: unset;
+  text-transform: uppercase;
+  color: white;
+}
+
 .disclaimer-fade {
   justify-content: center;
   align-items: center;
@@ -119,12 +126,10 @@
   cursor: pointer;
   padding: 0.5rem;
   margin-bottom: 0;
-  color: white;
 }
 
 .disclaimer-confirm {
   width: 30%;
-  color: black;
   cursor: pointer;
   padding: 0.5rem;
   margin-right: 0;
@@ -140,7 +145,6 @@
 }
 
 .disclaimer-action {
-  color: black;
   cursor: pointer;
   padding: 0.5rem;
   width: 20%;
