@@ -2,7 +2,6 @@ button {
   border: none;
   background-color: unset;
   text-transform: uppercase;
-  color: white;
 }
 
 .disclaimer-fade {
@@ -121,6 +120,7 @@ button {
 }
 
 .disclaimer-cancel {
+  color: white;
   width: 30%;
   border: #fff solid 0.5px;
   cursor: pointer;
@@ -137,6 +137,7 @@ button {
 }
 
 .disclaimer-toggle {
+  color: white;
   border: #fff solid 0.5px;
   cursor: pointer;
   padding: 0.5rem;

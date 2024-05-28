@@ -40,7 +40,7 @@ function createConsentPopup() {
   disclaimerLink.className = "disclaimer-link";
   if (window.location.href.includes(".dk")) {
     disclaimerLink.innerHTML = `
-      <a href="/persondatapolitik/">
+      <a href="/privatlivspolitik/">
         Læs om vores brug af cookies og privatlivspolitik.
       </a>
     `;
