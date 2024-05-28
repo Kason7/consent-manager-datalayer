@@ -124,7 +124,6 @@
 
 .disclaimer-confirm {
   width: 30%;
-  background-color: rgb(179, 234, 64);
   color: black;
   cursor: pointer;
   padding: 0.5rem;
@@ -141,7 +140,6 @@
 }
 
 .disclaimer-action {
-  background-color: rgb(179, 234, 64);
   color: black;
   cursor: pointer;
   padding: 0.5rem;

@@ -30,7 +30,7 @@ function createConsentPopup() {
   const disclaimerLink = document.createElement("div");
   disclaimerLink.className = "disclaimer-link";
   disclaimerLink.innerHTML = `
-                        <a href="/policies/privacy-policy/">
+                        <a href="/persondata/">
                           Læs om vores brug af cookies og privatlivspolitik.
                         </a>
                     `;
